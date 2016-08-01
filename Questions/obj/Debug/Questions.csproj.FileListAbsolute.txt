@@ -1,0 +1,62 @@
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Questions.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Questions.pdb
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Antlr3.Runtime.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\AspNet.ScriptManager.jQuery.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.AspNet.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.Core.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OAuth.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OpenId.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.AspNet.FriendlyUrls.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.ScriptManager.MSAjax.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.ScriptManager.WebForms.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\System.Web.Optimization.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\System.Web.Providers.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\WebGrease.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.Core.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OAuth.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OpenId.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\DotNetOpenAuth.AspNet.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.AspNet.Membership.OpenAuth.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\bin\Microsoft.AspNet.FriendlyUrls.xml
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\obj\Debug\Questions.dll
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\obj\Debug\Questions.pdb
+C:\Users\h.raju\documents\visual studio 2012\Projects\Questions\Questions\obj\Debug\Questions.csprojResolveAssemblyReference.cache
+D:\Questions\Questions\bin\Questions.dll
+D:\Questions\Questions\bin\Questions.pdb
+D:\Questions\Questions\bin\Antlr3.Runtime.dll
+D:\Questions\Questions\bin\AspNet.ScriptManager.jQuery.dll
+D:\Questions\Questions\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+D:\Questions\Questions\bin\DotNetOpenAuth.AspNet.dll
+D:\Questions\Questions\bin\DotNetOpenAuth.Core.dll
+D:\Questions\Questions\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\Questions\Questions\bin\DotNetOpenAuth.OAuth.dll
+D:\Questions\Questions\bin\DotNetOpenAuth.OpenId.dll
+D:\Questions\Questions\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\Questions\Questions\bin\Microsoft.AspNet.FriendlyUrls.dll
+D:\Questions\Questions\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+D:\Questions\Questions\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+D:\Questions\Questions\bin\Microsoft.ScriptManager.MSAjax.dll
+D:\Questions\Questions\bin\Microsoft.ScriptManager.WebForms.dll
+D:\Questions\Questions\bin\Microsoft.Web.Infrastructure.dll
+D:\Questions\Questions\bin\System.Web.Optimization.dll
+D:\Questions\Questions\bin\System.Web.Providers.dll
+D:\Questions\Questions\bin\WebGrease.dll
+D:\Questions\Questions\bin\DotNetOpenAuth.Core.xml
+D:\Questions\Questions\bin\DotNetOpenAuth.OAuth.xml
+D:\Questions\Questions\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\Questions\Questions\bin\DotNetOpenAuth.OpenId.xml
+D:\Questions\Questions\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\Questions\Questions\bin\DotNetOpenAuth.AspNet.xml
+D:\Questions\Questions\bin\Microsoft.AspNet.Membership.OpenAuth.xml
+D:\Questions\Questions\bin\Microsoft.AspNet.FriendlyUrls.xml
+D:\Questions\Questions\obj\Debug\Questions.csprojResolveAssemblyReference.cache
+D:\Questions\Questions\obj\Debug\Questions.dll
+D:\Questions\Questions\obj\Debug\Questions.pdb
