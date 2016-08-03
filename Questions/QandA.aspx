@@ -36,6 +36,7 @@
         var clickedNodeY;
         var currentAddedNodeY;
         var cy;
+        var masterParentID = 'Scenario';
         var parentId;
         var questionIndex = 0;
         var animation;
@@ -52,7 +53,7 @@
                 width: 400,
                 modal: true
             });
-            //  debugger;
+
             cy = cytoscape({
                 container: $('#cy')[0],
 
@@ -116,19 +117,29 @@
             ]);
 
             cy.on('click', 'node', function (evt) {
-                //debugger
                 parentId = this.data('id');
-                questionIndex = this.data('questionIndex');
-                clickedNodeX = this.renderedPosition().x;
-                clickedNodeY = this.renderedPosition().y;
-                if (this.data('nodeType') == 'Question') {
 
-                    $("#divAnswerContainer").dialog('open');
-                } else if (this.data('nodeType') == 'Scenario') {
-                    addQuestion(200, 200, 0);
-                }
-                else if (this.data('nodeType') == 'Answer') {
-                    addQuestion(clickedNodeX + 300, clickedNodeY, 0);
+                if (!parentId.includes('Answer')) {
+
+                    var newId = parentId.slice(-1);
+
+                    //*han commented to avoid adding same first question everytime root is clicked. 
+                    ////questionIndex = this.data('questionIndex');
+
+                    questionIndex = cy.filter("node[nodeType='Question']").select().length; // to pick next question from array
+
+                    clickedNodeX = this.renderedPosition().x;
+                    clickedNodeY = this.renderedPosition().y;
+                    if (this.data('nodeType') == 'Question') {
+
+                        $("#divAnswerContainer").dialog('open');
+                    } else if (this.data('nodeType') == 'Scenario') {
+                        //addQuestion(200, 200, 0, masterParentID);
+                        addQuestion(200, 200, questionIndex, masterParentID);
+                    }
+                    else if (this.data('nodeType') == 'Answer') {
+                        addQuestion(clickedNodeX + 300, clickedNodeY, newId, masterParentID);
+                    }
                 }
 
             });
@@ -151,6 +162,7 @@
         //});
 
         function rearrangeNodes() {
+
             cy.$('node').each(function () {
                 var nodeY = this.renderedPosition('y');
                 if (nodeY > currentAddedNodeY)
@@ -158,6 +170,7 @@
             });
         }
         function addToTreeClick() {
+
             var answer = $("#tbAnswers").val();
 
             if (answer.length > 330) {
@@ -170,8 +183,11 @@
             }
             addAnswer();
 
-            var questionNodeLength = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Question']").select().length;
-            addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex + 1);
+            ////var questionNodeLength = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Question']").select().length;
+            // *han added fix to relate all new questions to root instead of recent questions 
+            var questionNodeLength = cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length;
+
+            addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex + 1, masterParentID);
             $("#tbAnswers").val('');
             $("#divAnswerContainer").dialog('close');
             rearrangeNodes();
@@ -179,7 +195,7 @@
 
 
         function addAndContinueClick() {
-            // debugger;
+
             var answer = $("#tbAnswers").val();
 
             if (answer.length > 330) {
@@ -196,14 +212,29 @@
             rearrangeNodes();
         }
 
-        function addQuestion(positionX, positionY, questionIndex) {
-            //debugger
+        function addQuestion(positionX, positionY, questionIndex, masterParentID) {
+
+            //cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length
+
             var questionNodeLength = cy.filter("node[nodeType='Question']").select().length;
             var answerNodeLength = cy.filter("node[nodeType='Answer']").select().length;
             var questionId = "Question" + (questionNodeLength + 1);
-            var childNodeLength = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Question']").select().length;
-            if (childNodeLength == 0 && questions[questionIndex] != undefined) {
+            //var childNodeLength = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Question']").select().length;
+
+            //* han
+            var childNodeLength = cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length;
+            //if (childNodeLength == 0 && questions[questionIndex] != undefined) {
+
+            // han added
+            if (questions[questionIndex] != undefined) {
+                debugger;
+
+                parentId = masterParentID;
+
                 cy.add([{
+                    //group: "nodes", data: { id: questionId, parentId: parentId, sno: questionNodeLength + 1, questionIndex: questionIndex, nodeType: 'Question', name: questions[questionIndex] }, renderedPosition: { x: positionX, y: positionY }, style: {
+
+                    //*han added
                     group: "nodes", data: { id: questionId, parentId: parentId, sno: questionNodeLength + 1, questionIndex: questionIndex, nodeType: 'Question', name: questions[questionIndex] }, renderedPosition: { x: positionX, y: positionY }, style: {
                         shape: 'roundrectangle',
                         'background-color': '#FFA500',
@@ -260,12 +291,11 @@
         }
 
 
-        function redrawClick() {
-            var layout = cy.makeLayout({ name: 'cose' });
+        ////function redrawClick() {
+        ////    var layout = cy.makeLayout({ name: 'cose' });
+        ////    layout.run();
+        ////}
 
-            layout.run();
-
-        }
     </script>
 
 </asp:Content>
@@ -276,9 +306,9 @@
 
     <div id="divAnswerContainer">
         <textarea id="tbAnswers" rows="5" style="width: 100%"></textarea>
-        <input type="button" value="Add and Proceed" onclick="addToTreeClick()" />
-        <input type="button" value="Add and Continue" onclick="addAndContinueClick()" />
-       <%-- <input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
+        <input type="button" value="Proceed to next question" onclick="addToTreeClick()" />
+        <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
+        <%--<input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
     </div>
 
 </asp:Content>
