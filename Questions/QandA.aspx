@@ -3,7 +3,7 @@
 
 <asp:Content runat="server" ID="headQandA" ContentPlaceHolderID="HeadContent">
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
     <script src="Scripts/jquery-1.8.2.min.js"></script>
     <script src="Scripts/jquery-ui-1.8.24.min.js"></script>
     <script src="Scripts/Cytoscope/cytoscape.min.js"></script>
@@ -11,7 +11,7 @@
     <script src="Scripts/Cytoscope/cytoscape-dagre.js"></script>
 
 
-   <style>
+    <style>
         body {
             font-family: helvetica;
             font-size: 14px;
@@ -52,7 +52,7 @@
                 width: 400,
                 modal: true
             });
-            debugger;
+            //  debugger;
             cy = cytoscape({
                 container: $('#cy')[0],
 
@@ -116,7 +116,7 @@
             ]);
 
             cy.on('click', 'node', function (evt) {
-
+                //debugger
                 parentId = this.data('id');
                 questionIndex = this.data('questionIndex');
                 clickedNodeX = this.renderedPosition().x;
@@ -151,7 +151,6 @@
         //});
 
         function rearrangeNodes() {
-            debugger;
             cy.$('node').each(function () {
                 var nodeY = this.renderedPosition('y');
                 if (nodeY > currentAddedNodeY)
@@ -172,7 +171,6 @@
             addAnswer();
 
             var questionNodeLength = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Question']").select().length;
-
             addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex + 1);
             $("#tbAnswers").val('');
             $("#divAnswerContainer").dialog('close');
@@ -181,7 +179,7 @@
 
 
         function addAndContinueClick() {
-            debugger;
+            // debugger;
             var answer = $("#tbAnswers").val();
 
             if (answer.length > 330) {
@@ -199,6 +197,7 @@
         }
 
         function addQuestion(positionX, positionY, questionIndex) {
+            //debugger
             var questionNodeLength = cy.filter("node[nodeType='Question']").select().length;
             var answerNodeLength = cy.filter("node[nodeType='Answer']").select().length;
             var questionId = "Question" + (questionNodeLength + 1);
@@ -219,14 +218,22 @@
         }
 
         function addAnswer() {
-
+            //debugger
             var answer = $("#tbAnswers").val();
+            var answerLength = $("#tbAnswers").val().length;
             var questionNodeLength = cy.filter("node[nodeType='Question']").select().length;
             var answerNodeLength = cy.filter("node[nodeType='Answer']").select().length;
             var answerId = "Answer" + (answerNodeLength + 1);
             var childNodeLength = cy.filter("node[parentId='" + parentId + "']").select().length;
             var positionY = clickedNodeY + (childNodeLength > 0 ? 100 * childNodeLength : 0);
-
+            var dummyAnswer = '';
+            if (answerLength > 20 && !answer.includes(' ')) {
+                //    alert('answer should have atleast one space');
+                //    return false;
+                dummyAnswer = answer.substring(0, 20) + "...";
+            }
+            else
+                dummyAnswer = answer;
 
             cy.add([
             {
@@ -235,7 +242,8 @@
                     sno: answerNodeLength + 1,
                     parentId: parentId,
                     nodeType: 'Answer',
-                    name: answer
+                    name: dummyAnswer,
+                    tooltipText: answer
                 },
                 renderedPosition: { x: clickedNodeX + 300, y: positionY }, style: {
                     shape: 'roundrectangle',
@@ -243,6 +251,8 @@
                     width: 175,
                     height: 50,
                     'word-break': 'break-all'
+
+
                 }
             },
             { group: "edges", data: { id: 'QuestionAnswerEdge' + (questionNodeLength + answerNodeLength), source: parentId, target: answerId } }]);
@@ -262,13 +272,13 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 
-<div id="cy" style="width: 100%; height: 80%"></div>
-                    
-        <div id="divAnswerContainer">
-            <textarea id="tbAnswers" rows="5" style="width: 100%"></textarea>
-            <input type="button" value="Add and Proceed" onclick="addToTreeClick()" />
-            <input type="button" value="Add and Continue" onclick="addAndContinueClick()" />
-            <input type="button" value="Restructure the Tree" onclick="redrawClick()" />
-        </div>
+    <div id="cy" style="width: 100%; height: 80%"></div>
+
+    <div id="divAnswerContainer">
+        <textarea id="tbAnswers" rows="5" style="width: 100%"></textarea>
+        <input type="button" value="Add and Proceed" onclick="addToTreeClick()" />
+        <input type="button" value="Add and Continue" onclick="addAndContinueClick()" />
+        <input type="button" value="Restructure the Tree" onclick="redrawClick()" />
+    </div>
 
 </asp:Content>
