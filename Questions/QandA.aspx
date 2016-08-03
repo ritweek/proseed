@@ -187,7 +187,9 @@
             // *han added fix to relate all new questions to root instead of recent questions 
             var questionNodeLength = cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length;
 
-            addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex + 1, masterParentID);
+            //addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex + 1, masterParentID);
+            addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex, masterParentID);
+
             $("#tbAnswers").val('');
             $("#divAnswerContainer").dialog('close');
             rearrangeNodes();
