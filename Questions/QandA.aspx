@@ -278,7 +278,7 @@
         <textarea id="tbAnswers" rows="5" style="width: 100%"></textarea>
         <input type="button" value="Add and Proceed" onclick="addToTreeClick()" />
         <input type="button" value="Add and Continue" onclick="addAndContinueClick()" />
-        <input type="button" value="Restructure the Tree" onclick="redrawClick()" />
+       <%-- <input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
     </div>
 
 </asp:Content>
