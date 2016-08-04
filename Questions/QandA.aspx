@@ -260,7 +260,7 @@
             var childNodeLength = cy.filter("node[parentId='" + parentId + "']").select().length;
             var positionY = clickedNodeY + (childNodeLength > 0 ? 100 * childNodeLength : 0);
             var dummyAnswer = '';
-            if (answerLength > 20 && !answer.includes(' ')) {
+            if (answerLength > 20 ) {
                 //    alert('answer should have atleast one space');
                 //    return false;
                 dummyAnswer = answer.substring(0, 20) + "...";
