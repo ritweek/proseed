@@ -52,7 +52,8 @@
             $('#divAnswerContainer').dialog({
                 autoOpen: false,
                 width: 400,
-                modal: true
+                modal: true,
+                resizable : false
             });
 
             //$('#divDeleteContainer').dialog({
@@ -60,6 +61,14 @@
             //    width: 400,
             //    modal: true
             //});
+
+            $('#divTooltip').dialog({
+                autoOpen: false,
+                width: 400,
+                modal: false,
+                resizable: false
+                //closeButton: flase
+            });
 
             cy = cytoscape({
                 container: $('#cy')[0],
@@ -166,6 +175,22 @@
                 },
                 duration: 1000
             });
+
+
+            cy.on('mouseover', 'node', function (evt) {
+                debugger;
+
+                if (this.data('id').includes('Answer')) {
+
+                    var ans = this.data('tooltipText');
+                    $("#divTooltip").dialog('open');
+                    $("#divTooltip").text(ans);
+
+                    setTimeout(closeOriginalAns, 4000);
+
+                }
+
+            });
         });
 
         //var e = jQuery.Event("click");
@@ -174,6 +199,12 @@
         //cy.on('click', 'node', function (evt) {
         //    console.log('clicked ' + this.id());
         //});
+
+        function closeOriginalAns() {
+            debugger;
+            $("#divTooltip").dialog('close');
+            
+        }
 
         function rearrangeNodes() {
 
@@ -334,7 +365,9 @@
         <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
         <%--<input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
   </div>
-    
+    <div id="divTooltip">
+    </div>
+
  <%-- 
        <div id="divDeleteContainer">
         <input type="button" value="Delete" onclick="deleteAnswer()" />
