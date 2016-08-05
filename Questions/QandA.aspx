@@ -40,6 +40,7 @@
         var parentId;
         var questionIndex = 0;
         var animation;
+        var positionIncrement = 0;
         var questions = ["List all the pre-requisites and dependencies",
             "What are all the input variables?",
             "What are the exceptions you want to handle?",
@@ -53,6 +54,12 @@
                 width: 400,
                 modal: true
             });
+
+            //$('#divDeleteContainer').dialog({
+            //    autoOpen: false,
+            //    width: 400,
+            //    modal: true
+            //});
 
             cy = cytoscape({
                 container: $('#cy')[0],
@@ -116,6 +123,7 @@
                 }
             ]);
 
+   
             cy.on('click', 'node', function (evt) {
                 parentId = this.data('id');
 
@@ -125,7 +133,7 @@
 
                     //*han commented to avoid adding same first question everytime root is clicked. 
                     ////questionIndex = this.data('questionIndex');
-
+                    
                     questionIndex = cy.filter("node[nodeType='Question']").select().length; // to pick next question from array
 
                     clickedNodeX = this.renderedPosition().x;
@@ -135,12 +143,18 @@
                         $("#divAnswerContainer").dialog('open');
                     } else if (this.data('nodeType') == 'Scenario') {
                         //addQuestion(200, 200, 0, masterParentID);
-                        addQuestion(200, 200, questionIndex, masterParentID);
+                        addQuestion(200 + positionIncrement, 200 + positionIncrement, questionIndex, masterParentID);
+                        positionIncrement = positionIncrement + 200;
                     }
                     else if (this.data('nodeType') == 'Answer') {
                         addQuestion(clickedNodeX + 300, clickedNodeY, newId, masterParentID);
                     }
                 }
+
+                //else
+                //{
+                //    $("#divDeleteContainer").dialog('open');
+                //}
 
             });
 
@@ -297,7 +311,15 @@
         ////    var layout = cy.makeLayout({ name: 'cose' });
         ////    layout.run();
         ////}
+        //function deleteAnswer(currentNode)
+        //{
+        //    debugger;
 
+        //    currentNode.data('id')
+        //    //currentNode.data('name')
+
+        //    cy.remove();
+        //}
     </script>
 
 </asp:Content>
@@ -311,6 +333,13 @@
         <input type="button" value="Proceed to next question" onclick="addToTreeClick()" />
         <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
         <%--<input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
-    </div>
+  </div>
+    
+ <%-- 
+       <div id="divDeleteContainer">
+        <input type="button" value="Delete" onclick="deleteAnswer()" />
+    </div>--%>
+
+    
 
 </asp:Content>
