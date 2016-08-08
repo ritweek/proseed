@@ -52,7 +52,8 @@
                 autoOpen: false,
                 width: 400,
                 modal: true,
-                resizable: false
+                resizable: false,
+                title: 'Action'
             });
 
             $('#divDeleteContainer').dialog({
@@ -185,7 +186,20 @@
                     $("#divTooltip").dialog('open');
                     $("#divTooltip").text(ans);
 
-                    setTimeout(closeOriginalAns, 4000);
+                    // auto disappear after some time
+                    setTimeout(closeOriginalAns, 5000);
+
+                }
+
+            });
+
+            cy.on('mouseout', 'node', function (evt) {
+                debugger;
+
+                if (this.data('id').includes('Answer')) {
+
+                    var ans = this.data('tooltipText');
+                    $("#divTooltip").dialog('close');
 
                 }
 
@@ -364,7 +378,7 @@
     <div id="cy" style="width: 100%; height: 80%"></div>
 
     <div id="divAnswerContainer">
-        <textarea id="tbAnswers" rows="5" style="width: 100%"></textarea>
+        <textarea id="tbAnswers" rows="5" style="width: 96%"></textarea>
         <input type="button" value="Proceed to next question" onclick="addToTreeClick()" />
         <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
         <input type="button" value="Delete" onclick="deleteNode()" />
