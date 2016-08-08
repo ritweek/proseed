@@ -10,7 +10,6 @@
     <script src="Scripts/Cytoscope/dagre.min.js"></script>
     <script src="Scripts/Cytoscope/cytoscape-dagre.js"></script>
 
-
     <style>
         body {
             font-family: helvetica;
@@ -56,17 +55,18 @@
                 resizable: false
             });
 
-            //$('#divDeleteContainer').dialog({
-            //    autoOpen: false,
-            //    width: 400,
-            //    modal: true
-            //});
+            $('#divDeleteContainer').dialog({
+                autoOpen: false,
+                width: 400,
+                modal: true
+            });
 
             $('#divTooltip').dialog({
                 autoOpen: false,
                 width: 400,
                 modal: false,
                 resizable: false
+                //closeButton: flase
             });
 
             cy = cytoscape({
@@ -159,10 +159,10 @@
                     }
                 }
 
-                //else
-                //{
-                //    $("#divDeleteContainer").dialog('open');
-                //}
+                else {
+                    $("#divTooltip").dialog('close');
+                    $("#divDeleteContainer").dialog('open');
+                }
 
             });
 
@@ -177,7 +177,7 @@
 
 
             cy.on('mouseover', 'node', function (evt) {
-                debugger;
+                // debugger;
 
                 if (this.data('id').includes('Answer')) {
 
@@ -185,27 +185,11 @@
                     $("#divTooltip").dialog('open');
                     $("#divTooltip").text(ans);
 
-                    // auto disappear after some time
-                    setTimeout(closeOriginalAns, 5000);
+                    setTimeout(closeOriginalAns, 4000);
 
                 }
 
             });
-
-
-            cy.on('mouseout', 'node', function (evt) {
-                debugger;
-
-                if (this.data('id').includes('Answer')) {
-
-                    var ans = this.data('tooltipText');
-                    $("#divTooltip").dialog('close');
-
-                }
-
-            });
-
-
         });
 
         //var e = jQuery.Event("click");
@@ -216,7 +200,6 @@
         //});
 
         function closeOriginalAns() {
-            debugger;
             $("#divTooltip").dialog('close');
 
         }
@@ -289,8 +272,6 @@
 
             // han added
             if (questions[questionIndex] != undefined) {
-                debugger;
-
                 parentId = masterParentID;
 
                 cy.add([{
@@ -357,15 +338,23 @@
         ////    var layout = cy.makeLayout({ name: 'cose' });
         ////    layout.run();
         ////}
-        //function deleteAnswer(currentNode)
-        //{
-        //    debugger;
 
-        //    currentNode.data('id')
-        //    //currentNode.data('name')
+        function deleteNode() {
+            debugger;
 
-        //    cy.remove();
-        //}
+            if (parentId.includes('Question')) {
+                var numAnswers = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Answer']").select().length;
+                for (var i = 0; i < numAnswers; i++) {
+                    cy.remove(cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Answer']").select()[0]);
+                }
+            }
+
+            var deleteNode = cy.$("#" + parentId);
+            cy.remove(deleteNode);
+            $("#divDeleteContainer").dialog('close');
+            $("#divAnswerContainer").dialog('close');
+
+        }
     </script>
 
 </asp:Content>
@@ -378,13 +367,17 @@
         <textarea id="tbAnswers" rows="5" style="width: 100%"></textarea>
         <input type="button" value="Proceed to next question" onclick="addToTreeClick()" />
         <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
+        <input type="button" value="Delete" onclick="deleteNode()" />
         <%--<input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
     </div>
     <div id="divTooltip">
     </div>
 
-    <%-- 
-       <div id="divDeleteContainer">
-        <input type="button" value="Delete" onclick="deleteAnswer()" />
-    </div>--%>
+
+    <div id="divDeleteContainer">
+        <input type="button" value="Delete" onclick="deleteNode()" />
+    </div>
+
+
+
 </asp:Content>
