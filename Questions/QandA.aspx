@@ -53,7 +53,7 @@
                 autoOpen: false,
                 width: 400,
                 modal: true,
-                resizable : false
+                resizable: false
             });
 
             //$('#divDeleteContainer').dialog({
@@ -67,7 +67,6 @@
                 width: 400,
                 modal: false,
                 resizable: false
-                //closeButton: flase
             });
 
             cy = cytoscape({
@@ -132,7 +131,7 @@
                 }
             ]);
 
-   
+
             cy.on('click', 'node', function (evt) {
                 parentId = this.data('id');
 
@@ -142,7 +141,7 @@
 
                     //*han commented to avoid adding same first question everytime root is clicked. 
                     ////questionIndex = this.data('questionIndex');
-                    
+
                     questionIndex = cy.filter("node[nodeType='Question']").select().length; // to pick next question from array
 
                     clickedNodeX = this.renderedPosition().x;
@@ -186,11 +185,27 @@
                     $("#divTooltip").dialog('open');
                     $("#divTooltip").text(ans);
 
-                    setTimeout(closeOriginalAns, 4000);
+                    // auto disappear after some time
+                    setTimeout(closeOriginalAns, 5000);
 
                 }
 
             });
+
+
+            cy.on('mouseout', 'node', function (evt) {
+                debugger;
+
+                if (this.data('id').includes('Answer')) {
+
+                    var ans = this.data('tooltipText');
+                    $("#divTooltip").dialog('close');
+
+                }
+
+            });
+
+
         });
 
         //var e = jQuery.Event("click");
@@ -203,7 +218,7 @@
         function closeOriginalAns() {
             debugger;
             $("#divTooltip").dialog('close');
-            
+
         }
 
         function rearrangeNodes() {
@@ -305,7 +320,7 @@
             var childNodeLength = cy.filter("node[parentId='" + parentId + "']").select().length;
             var positionY = clickedNodeY + (childNodeLength > 0 ? 100 * childNodeLength : 0);
             var dummyAnswer = '';
-            if (answerLength > 20 ) {
+            if (answerLength > 20) {
                 //    alert('answer should have atleast one space');
                 //    return false;
                 dummyAnswer = answer.substring(0, 20) + "...";
@@ -364,15 +379,12 @@
         <input type="button" value="Proceed to next question" onclick="addToTreeClick()" />
         <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
         <%--<input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
-  </div>
+    </div>
     <div id="divTooltip">
     </div>
 
- <%-- 
+    <%-- 
        <div id="divDeleteContainer">
         <input type="button" value="Delete" onclick="deleteAnswer()" />
     </div>--%>
-
-    
-
 </asp:Content>
