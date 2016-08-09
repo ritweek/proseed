@@ -150,6 +150,15 @@
                     if (this.data('nodeType') == 'Question') {
 
                         $("#divAnswerContainer").dialog('open');
+
+                        if (cy.filter("node[nodeType='Question']").select().length == questions.length) {
+                            debugger;
+                            btnProceedQue.style.display = 'none';
+                        }
+                        else {
+                            btnProceedQue.style.display = 'block';
+                        }
+
                     } else if (this.data('nodeType') == 'Scenario') {
                         //addQuestion(200, 200, 0, masterParentID);
                         addQuestion(200 + positionIncrement, 200 + positionIncrement, questionIndex, masterParentID);
@@ -194,7 +203,7 @@
             });
 
             cy.on('mouseout', 'node', function (evt) {
-                debugger;
+                //debugger;
 
                 if (this.data('id').includes('Answer')) {
 
@@ -272,6 +281,19 @@
         }
 
         function addQuestion(positionX, positionY, questionIndex, masterParentID) {
+
+            debugger;
+            // Work in PROGRESS
+            // Do not generate new question, when there are questions un-answered on canvas
+            ////var numQues = cy.filter("node[nodeType='Question']").select().length;
+            ////for (var i = 0; i < numQues; i++) {
+            ////    var node = cy.filter("node[nodeType='Question']").select()[i];
+
+            ////    if (node.filter("node[nodeType='Answer']").select().length == 0) {
+            ////        // Alert user to answer existing question first, before adding new question
+            ////        return;
+            ////    }
+            ////}
 
             //cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length
 
@@ -354,7 +376,7 @@
         ////}
 
         function deleteNode() {
-            debugger;
+            //debugger;
 
             if (parentId.includes('Question')) {
                 var numAnswers = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Answer']").select().length;
@@ -379,7 +401,7 @@
 
     <div id="divAnswerContainer">
         <textarea id="tbAnswers" rows="5" style="width: 96%"></textarea>
-        <input type="button" value="Proceed to next question" onclick="addToTreeClick()" />
+        <input id="btnProceedQue" type="button" value="Proceed to next question" onclick="addToTreeClick()" />
         <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
         <input type="button" value="Delete" onclick="deleteNode()" />
         <%--<input type="button" value="Restructure the Tree" onclick="redrawClick()" />--%>
