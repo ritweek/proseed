@@ -123,7 +123,7 @@
             cy.add([
                 {
                     group: "nodes", data: { id: 'Scenario', sno: 1, name: scenario, nodeType: 'Scenario', parentId: '', questionIndex: 0 },
-                    renderedPosition: { x: 1000, y: 125 },
+                    renderedPosition: { x: 950, y: 175 },
                     style: {
                         shape: 'roundrectangle',
                         width: 300,
@@ -189,7 +189,7 @@
             cy.on('mouseover', 'node', function (evt) {
                 // debugger;
 
-                if (this.data('id').includes('Answer')) {
+                if (this.data('id').includes('Answer') && this.data('tooltipText').length>20) {
 
                     var ans = this.data('tooltipText');
                     $("#divTooltip").dialog('open');
