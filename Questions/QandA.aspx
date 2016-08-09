@@ -72,21 +72,19 @@
 
             cy = cytoscape({
                 container: $('#cy')[0],
-
                 boxSelectionEnabled: false,
                 autounselectify: true,
-
                 style: cytoscape.stylesheet()
                   .selector('node')
                     .css({
                         'content': 'data(name)',
                         'text-valign': 'center',
                         'color': 'black',
-                        'background-color': '#ffcccc',
+                        'background-color': 'lightblue',
                         'text-wrap': 'wrap',
                         'text-max-width': '175px',
                         'text-outline-width': 0,
-                        'font-size': 12,
+                        'font-size': 22,
                         'word-break': 'break-all'
 
                     })
@@ -125,7 +123,7 @@
                     group: "nodes", data: { id: 'Scenario', sno: 1, name: scenario, nodeType: 'Scenario', parentId: '', questionIndex: 0 },
                     renderedPosition: { x: 950, y: 175 },
                     style: {
-                        shape: 'roundrectangle',
+                        shape: 'oval',
                         width: 300,
                         height: 50
                     }
@@ -142,7 +140,7 @@
 
                     //*han commented to avoid adding same first question everytime root is clicked. 
                     ////questionIndex = this.data('questionIndex');
-
+                    debugger;
                     questionIndex = cy.filter("node[nodeType='Question']").select().length; // to pick next question from array
 
                     clickedNodeX = this.renderedPosition().x;
@@ -194,7 +192,6 @@
             });
 
             cy.on('mouseout', 'node', function (evt) {
-                debugger;
 
                 if (this.data('id').includes('Answer')) {
 
@@ -274,10 +271,36 @@
         function addQuestion(positionX, positionY, questionIndex, masterParentID) {
 
             //cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length
-
+            debugger;
             var questionNodeLength = cy.filter("node[nodeType='Question']").select().length;
             var answerNodeLength = cy.filter("node[nodeType='Answer']").select().length;
             var questionId = "Question" + (questionNodeLength + 1);
+            var flag = 0;
+            //for (var i = 1; i <= questionNodeLength; i++) {
+            //    if () {
+            //        Flag = 0;
+            //    }
+            //    else
+            //    {
+            //        Flag = i;
+            //        questionId = "Question" + i;
+            //        break;
+            //    }
+            //}
+
+
+
+
+
+
+
+
+
+
+            //if ($("#questionId").val() != "")
+            //{
+            //    questionId = "Question" + (questionNodeLength + 1);
+            //}
             //var childNodeLength = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Question']").select().length;
 
             //* han
@@ -293,10 +316,11 @@
 
                     //*han added
                     group: "nodes", data: { id: questionId, parentId: parentId, sno: questionNodeLength + 1, questionIndex: questionIndex, nodeType: 'Question', name: questions[questionIndex] }, renderedPosition: { x: positionX, y: positionY }, style: {
-                        shape: 'roundrectangle',
+                        shape: 'diamond',
                         'background-color': '#FFA500',
-                        width: 175,
-                        height: 50
+                        'font-size': 15,
+                        width: 225,
+                        height: 90
                     }
                 },
                 { group: "edges", data: { id: 'QuestionQuestionEdge' + (questionNodeLength + answerNodeLength), source: parentId, target: questionId } }
@@ -335,7 +359,8 @@
                 },
                 renderedPosition: { x: clickedNodeX + 300, y: positionY }, style: {
                     shape: 'roundrectangle',
-                    'background-color': '#D3D3D3',
+                    'background-color': 'pink',
+                    'font-size': 15,
                     width: 175,
                     height: 50,
                     'word-break': 'break-all'
@@ -354,10 +379,10 @@
         ////}
 
         function deleteNode() {
-            debugger;
 
             if (parentId.includes('Question')) {
                 var numAnswers = cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Answer']").select().length;
+                positionIncrement = positionIncrement - 200;    
                 for (var i = 0; i < numAnswers; i++) {
                     cy.remove(cy.filter("node[parentId='" + parentId + "']").filter("node[nodeType='Answer']").select()[0]);
                 }
