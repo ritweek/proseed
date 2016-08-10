@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
-using Questions;
+using DevelopersGuide;
 
-namespace Questions
+namespace DevelopersGuide
 {
     public class Global : HttpApplication
     {

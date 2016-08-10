@@ -60,8 +60,6 @@ D:\Questions\Questions\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\Questions\Questions\obj\Debug\Questions.csprojResolveAssemblyReference.cache
 D:\Questions\Questions\obj\Debug\Questions.dll
 D:\Questions\Questions\obj\Debug\Questions.pdb
-D:\ProSeedProduct\proseed\Questions\bin\Questions.dll
-D:\ProSeedProduct\proseed\Questions\bin\Questions.pdb
 D:\ProSeedProduct\proseed\Questions\bin\Antlr3.Runtime.dll
 D:\ProSeedProduct\proseed\Questions\bin\AspNet.ScriptManager.jQuery.dll
 D:\ProSeedProduct\proseed\Questions\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
@@ -89,8 +87,6 @@ D:\ProSeedProduct\proseed\Questions\bin\DotNetOpenAuth.AspNet.xml
 D:\ProSeedProduct\proseed\Questions\bin\Microsoft.AspNet.Membership.OpenAuth.xml
 D:\ProSeedProduct\proseed\Questions\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\ProSeedProduct\proseed\Questions\obj\Debug\Questions.csprojResolveAssemblyReference.cache
-D:\ProSeedProduct\proseed\Questions\obj\Debug\Questions.dll
-D:\ProSeedProduct\proseed\Questions\obj\Debug\Questions.pdb
 D:\ProSeed Product\Questions\bin\Questions.dll.config
 D:\ProSeed Product\Questions\bin\Questions.dll
 D:\ProSeed Product\Questions\bin\Questions.pdb
@@ -154,3 +150,7 @@ D:\test\ProSeed Product - 09-08-2016-EOD\Questions\bin\Microsoft.AspNet.Friendly
 D:\test\ProSeed Product - 09-08-2016-EOD\Questions\obj\Debug\Questions.csprojResolveAssemblyReference.cache
 D:\test\ProSeed Product - 09-08-2016-EOD\Questions\obj\Debug\Questions.dll
 D:\test\ProSeed Product - 09-08-2016-EOD\Questions\obj\Debug\Questions.pdb
+D:\ProSeedProduct\proseed\Questions\bin\DevelopersGuide.dll
+D:\ProSeedProduct\proseed\Questions\bin\DevelopersGuide.pdb
+D:\ProSeedProduct\proseed\Questions\obj\Debug\DevelopersGuide.dll
+D:\ProSeedProduct\proseed\Questions\obj\Debug\DevelopersGuide.pdb

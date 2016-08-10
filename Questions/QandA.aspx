@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QandA.aspx.cs" Inherits="Questions.QandA" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QandA.aspx.cs" Inherits="DevelopersGuide.QandA" %>
 
 <asp:Content runat="server" ID="headQandA" ContentPlaceHolderID="HeadContent">
     <link href="ProseedQnAStyle.css" rel="stylesheet" />

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Questions
+namespace DevelopersGuide
 {
     public partial class _Default : Page
     {

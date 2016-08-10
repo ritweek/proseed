@@ -7,7 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Questions {
+namespace DevelopersGuide
+{
     
     
     public partial class _Default {
