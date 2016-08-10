@@ -1,15 +1,15 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QandA.aspx.cs" Inherits="DevelopersGuide.QandA" %>
 
 <asp:Content runat="server" ID="headQandA" ContentPlaceHolderID="HeadContent">
-    <link href="ProseedQnAStyle.css" rel="stylesheet" />
+   
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
-
     <script src="Scripts/jquery-1.8.2.min.js"></script>
     <script src="Scripts/jquery-ui-1.8.24.min.js"></script>
     <script src="Scripts/Cytoscope/cytoscape.min.js"></script>
     <script src="Scripts/Cytoscope/dagre.min.js"></script>
     <script src="Scripts/Cytoscope/cytoscape-dagre.js"></script>
-    <script src="ProseedQnAScript.js"></script>
+    <script src="Scripts/ProseedQnAScript.js"></script>
+    <link href="Content/ProseedQnAStyle.css" rel="stylesheet" />
 
     <script type="text/javascript">
         var scenario = '<%= (System.Web.HttpContext.Current.Request["feature"] as string)%>';
