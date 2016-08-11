@@ -5,72 +5,76 @@
 <head runat="server">
     <meta charset="utf-8" />
     <title><%: Page.Title %> - My ASP.NET Application</title>
-    <asp:PlaceHolder runat="server">     
-          <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>  
-    <webopt:BundleReference runat="server" Path="~/Content/css" /> 
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body>
     <form runat="server">
-    <asp:ScriptManager runat="server">
-        <Scripts>
-            <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
-            <%--Framework Scripts--%>
-            
-            <asp:ScriptReference Name="MsAjaxBundle" />
-            <asp:ScriptReference Name="jquery" />
-            <asp:ScriptReference Name="jquery.ui.combined" />
-            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-            <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-            <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-            <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-            <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-            <asp:ScriptReference Name="WebFormsBundle" />
-            <%--Site Scripts--%>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
+                <%--Framework Scripts--%>
 
-        </Scripts>
-    </asp:ScriptManager>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">
-                    <asp:Image ImageUrl="~/Images/Logo.png" ID="logo" runat="server" Height="35px" Width="35px"/>
-                    <a runat="server" href="~/">Develop as you wish!</a>
-                </p>
-            </div>
-            <div class="float-right"
-                <section id="login">
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <ul>
-                              <%--  <li><a id="registerLink" runat="server" href="~/Account/Register">Register</a></li>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">
+                        <asp:Image ImageUrl="~/Images/Logo.png" ID="logo" runat="server" Height="35px" Width="35px" />
+                        <a runat="server" href="~/">Develop as you wish!</a>
+                    </p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                            <AnonymousTemplate>
+                                <ul>
+                                    <%--  <li><a id="registerLink" runat="server" href="~/Account/Register">Register</a></li>
                                 <li><a id="loginLink" runat="server" href="~/Account/Login">Log in</a></li>--%>
-                            </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            <p>
-                                Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
-                                    <asp:LoginName runat="server" CssClass="username" /></a>!
+                                </ul>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <p>
+                                    Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
+                                        <asp:LoginName runat="server" CssClass="username" />
+                                    </a>!
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
-                            </p>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
-                </section>                
+                                </p>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                    </section>
+                    <div id="download-buttons" style="display:none">
+                        <input type="button" name="Save As JPEG" value="Save as JPEG " onclick="saveAsJPEG()" />
+                        <input type="button" name="Save As PNG" value="Save as PNG " onclick="saveAsPNG()" />
+                    </div>
+                </div>
             </div>
+        </header>
+        <div id="body">
+            <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+            <section class="content-wrapper main-content clear-fix">
+                <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            </section>
         </div>
-    </header>
-    <div id="body">
-        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
-        <section class="content-wrapper main-content clear-fix">
-            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
-        </section>
-    </div>
     </form>
 </body>
 </html>

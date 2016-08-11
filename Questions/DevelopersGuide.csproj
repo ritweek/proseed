@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
+    <Content Include="Default.html" />
     <Content Include="Images\Logo.png" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />

@@ -8,15 +8,22 @@ var parentId;
 var questionIndex = 0;
 var animation;
 var positionIncrement = 0;
-var questions = ["List all the pre-requisites and dependencies",
-    "What are all the input variables?",
-    "What are the exceptions you want to handle?",
-    "How do you plan to exit?"];
+var questions = [" What’s the minimum thing that needs to be done?",
+    "What are the prerequisites?",
+    "What are the dependencies?",
+    "What are the inputs we need?",
+    "How should we trust the inputs?",
+    "What authentication needs to be present?",
+    "What authorization needs to be present?",
+    "What about performance requirements?",
+    " What exception scenarios need to be handled?",
+    "What connections should be opened and released?",
+    "What boundary conditions we need to focus on?"];
 
 $(function () {
     $('#divAnswerContainer').dialog({
         autoOpen: false,
-        width: 400,
+        width: 500,
         modal: true,
         resizable: false,
         title: 'Action'
@@ -110,7 +117,6 @@ $(function () {
                 $("#divAnswerContainer").dialog('open');
 
                 if (cy.filter("node[nodeType='Question']").select().length == questions.length) {
-                    debugger;
                     btnProceedQue.style.display = 'none';
                 }
                 else {
@@ -181,23 +187,32 @@ function addToTreeClick() {
 
     var answer = $("#tbAnswers").val();
 
-    if (answer.length > 330) {
-        alert('Only 330 characters are allowed.');
-        return false;
+    //if (answer.length > 330) {
+    //    alert('Only 330 characters are allowed.');
+    //    return false;
+    //}
+    //if (answer.length <= 0) {
+    //    alert('Please enter your answer.');
+    //    return false;
+    //}
+    if (answer.length > 0) {
+        addAnswer();
+
+        var questionNodeLength = cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length;
+
+        addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex, masterParentID);
+
+        $("#tbAnswers").val('');
+        $("#divAnswerContainer").dialog('close');
+        rearrangeNodes();
     }
-    if (answer.length <= 0) {
-        alert('Please enter your answer.');
-        return false;
+    else
+    {
+        addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex, masterParentID);
+        $("#tbAnswers").val('');
+        $("#divAnswerContainer").dialog('close');
+        rearrangeNodes();
     }
-    addAnswer();
-
-    var questionNodeLength = cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length;
-
-    addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex, masterParentID);
-
-    $("#tbAnswers").val('');
-    $("#divAnswerContainer").dialog('close');
-    rearrangeNodes();
 }
 
 function addAndContinueClick() {
@@ -311,4 +326,16 @@ function deleteNode() {
     cy.remove(deleteNode);
     $("#divDeleteContainer").dialog('close');
     $("#divAnswerContainer").dialog('close');
+}
+
+function saveAsJPEG() {
+    var jpg64 = cy.jpg({ full: true });
+    //var url = jpg64.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    window.open(jpg64);
+}
+
+function saveAsPNG() {
+    var png64 = cy.png({ full: true });
+    //var url = png64.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    window.open(png64);
 }

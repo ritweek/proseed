@@ -13,19 +13,22 @@
 
     <script type="text/javascript">
         var scenario = '<%= (System.Web.HttpContext.Current.Request["feature"] as string)%>';
+
+        $(document).ready(function () { $('#download-buttons').show(); });
+
     </script>
 
 </asp:Content>
 
-<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-
+<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">    
     <div id="cy"></div>
 
     <div id="divAnswerContainer">
         <textarea id="tbAnswers" rows="5" style="width: 96%"></textarea>
-        <input id="btnProceedQue" type="button" value="Proceed to next question" onclick="addToTreeClick()" />
-        <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
-        <input type="button" value="Delete" onclick="deleteNode()" />
+        <input type="button" value="Add more answers" onclick="addAndContinueClick()" style="float:left"/>        
+        <input id="btnProceedQue" type="button" value="Proceed to next question" onclick="addToTreeClick()" style="float:left" />    
+        <input type="button" value="Delete" onclick="deleteNode()" style="float:left" />   
+        
     </div>
 
     <div id="divTooltip"></div>
@@ -33,5 +36,6 @@
     <div id="divDeleteContainer">
         <input type="button" value="Delete" onclick="deleteNode()" />
     </div>
+  <%--  <img id="jpg-eg" width="500" height="500"/>--%>
 
 </asp:Content>
