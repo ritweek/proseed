@@ -32,7 +32,6 @@
     </div>
 
     <div id="divTooltip" style="display:none">tooltip</div>
-
     <div id="divDeleteContainer">
         <input type="button" value="Delete" onclick="deleteNode()" />
     </div>
