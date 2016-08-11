@@ -7,7 +7,8 @@ var masterParentID = 'Scenario';
 var parentId;
 var questionIndex = 0;
 var animation;
-var positionIncrement = 0;
+var xPositionIncrement = 400;
+var yPositionIncrement = 0;
 var questions = [" What’s the minimum thing that needs to be done?",
     "What are the prerequisites?",
     "What are the dependencies?",
@@ -33,13 +34,6 @@ $(function () {
         autoOpen: false,
         width: 400,
         modal: true
-    });
-
-    $('#divTooltip').dialog({
-        autoOpen: false,
-        width: 400,
-        modal: false,
-        resizable: false
     });
 
     cy = cytoscape({
@@ -124,16 +118,16 @@ $(function () {
                 }
 
             } else if (this.data('nodeType') == 'Scenario') {
-                addQuestion(200 + positionIncrement, 200 + positionIncrement, questionIndex, masterParentID);
-                positionIncrement = positionIncrement + 200;
+                addQuestion(100 + xPositionIncrement, 80 + yPositionIncrement, questionIndex, masterParentID);
+                xPositionIncrement = xPositionIncrement + 100;
+                yPositionIncrement = yPositionIncrement + 80;
             }
             else if (this.data('nodeType') == 'Answer') {
-                addQuestion(clickedNodeX + 300, clickedNodeY, newId, masterParentID);
+                addQuestion(clickedNodeX + 100, clickedNodeY, newId, masterParentID);
             }
         }
 
         else {
-            $("#divTooltip").dialog('close');
             $("#divDeleteContainer").dialog('open');
         }
     });
@@ -151,11 +145,11 @@ $(function () {
         if (this.data('id').includes('Answer') && this.data('tooltipText').length > 15) {
 
             var ans = this.data('tooltipText');
-            $("#divTooltip").dialog('open');
             $("#divTooltip").text(ans);
-
-            // auto disappear after some time
-            setTimeout(closeOriginalAns, 5000);
+            $('#divTooltip').css('top', evt.originalEvent.clientY +"px");
+            $('#divTooltip').css('left', evt.originalEvent.clientX + "px");
+            $('#divTooltip').css('position', 'absolute');
+            $("#divTooltip").show();
         }
     });
 
@@ -164,15 +158,10 @@ $(function () {
         if (this.data('id').includes('Answer')) {
 
             var ans = this.data('tooltipText');
-            $("#divTooltip").dialog('close');
+            $("#divTooltip").hide();
         }
     });
 });
-
-function closeOriginalAns() {
-    $("#divTooltip").dialog('close');
-
-}
 
 function rearrangeNodes() {
 
@@ -186,15 +175,6 @@ function rearrangeNodes() {
 function addToTreeClick() {
 
     var answer = $("#tbAnswers").val();
-
-    //if (answer.length > 330) {
-    //    alert('Only 330 characters are allowed.');
-    //    return false;
-    //}
-    //if (answer.length <= 0) {
-    //    alert('Please enter your answer.');
-    //    return false;
-    //}
     if (answer.length > 0) {
         addAnswer();
 
@@ -204,14 +184,12 @@ function addToTreeClick() {
 
         $("#tbAnswers").val('');
         $("#divAnswerContainer").dialog('close');
-        rearrangeNodes();
     }
     else
     {
         addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex, masterParentID);
         $("#tbAnswers").val('');
         $("#divAnswerContainer").dialog('close');
-        rearrangeNodes();
     }
 }
 
@@ -230,7 +208,6 @@ function addAndContinueClick() {
     }
     addAnswer();
     $("#tbAnswers").val('');
-    rearrangeNodes();
 }
 
 function addQuestion(positionX, positionY, questionIndex, masterParentID) {
