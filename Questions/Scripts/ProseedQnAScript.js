@@ -92,7 +92,7 @@ $(function () {
     cy.add([
         {
             group: "nodes", data: { id: 'Scenario', sno: 1, name: scenario, nodeType: 'Scenario', parentId: '', questionIndex: 0 },
-            renderedPosition: { x: 950, y: 175 },
+            renderedPosition: { x: 950, y: 70 },
             style: {
                 shape: 'oval',
                 width: 300,
