@@ -25,9 +25,9 @@ $(function () {
     $('#divAnswerContainer').dialog({
         autoOpen: false,
         width: 500,
-        modal: true,
+        modal: false,
         resizable: false,
-        title: 'Action'
+        title: 'What do you think?'
     });
 
     $('#divDeleteContainer').dialog({
@@ -310,17 +310,17 @@ function deleteNode() {
 }
 
 function saveAsJPEG() {
-    debugger
     var jpg64 = cy.jpg({ full: true });
-    //$('<a id="testAnchor" href="' + jpg64 + ' download"></a>');
-    //$('#testAnchor').attr('href', jpg64);
-    //$('#testAnchor').click();
-    var url = jpg64.replace('data:image/jpeg', 'data:application/octet-stream;filename=file.png');
-    window.open(url);
+    $('#testAnchor').attr('href', jpg64);
+    $('#testAnchor').attr('download', 'DevelopersGuide.jpg');
+    var downloadLinkToBeClicked = document.getElementById('testAnchor');
+    downloadLinkToBeClicked.click();
 }
 
 function saveAsPNG() {
     var png64 = cy.png({ full: true });
-    //var url = png64.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-    window.open(png64);
+    $('#testAnchor').attr('href', png64);
+    $('#testAnchor').attr('download', 'DevelopersGuide.png');
+    var downloadLinkToBeClicked = document.getElementById('testAnchor');
+    downloadLinkToBeClicked.click();
 }
