@@ -7,8 +7,8 @@ var masterParentID = 'Scenario';
 var parentId;
 var questionIndex = 0;
 var animation;
-var xPositionIncrement = 400;
-var yPositionIncrement = 0;
+var xPositionIncrement = 0;
+var yPositionIncrement = 200;
 var questions = [" What’s the minimum thing that needs to be done?",
     "What are the prerequisites?",
     "What are the dependencies?",
@@ -27,9 +27,9 @@ $(function () {
     $('#divAnswerContainer').dialog({
         autoOpen: false,
         width: 500,
-        modal: true,
+        modal: false,
         resizable: false,
-        title: 'Action'
+        title: 'What do you think?'
     });
 
     $('#divDeleteContainer').dialog({
@@ -84,6 +84,10 @@ $(function () {
             padding: 10
         }
     });
+    var parentNodeWidth = 50;
+    if (scenario.length > 30) {
+        parentNodeWidth = 50 * (scenario.length/30)
+    }
     cy.add([
         {
             group: "nodes", data: { id: 'Scenario', sno: 1, name: scenario, nodeType: 'Scenario', parentId: '', questionIndex: 0 },
@@ -91,7 +95,7 @@ $(function () {
             style: {
                 shape: 'oval',
                 width: 300,
-                height: 50
+                height: parentNodeWidth
             }
         }
     ]);
@@ -119,12 +123,11 @@ $(function () {
                 }
 
             } else if (this.data('nodeType') == 'Scenario') {
-                addQuestion(100 + xPositionIncrement, 80 + yPositionIncrement, questionIndex, masterParentID);
-                xPositionIncrement = xPositionIncrement + 100;
-                yPositionIncrement = yPositionIncrement + 80;
+                addQuestion(300 + xPositionIncrement, yPositionIncrement, questionIndex, masterParentID);
+                xPositionIncrement = xPositionIncrement + 300;
             }
             else if (this.data('nodeType') == 'Answer') {
-                addQuestion(clickedNodeX + 100, clickedNodeY, newId, masterParentID);
+                addQuestion(clickedNodeX, clickedNodeY+200, newId, masterParentID);
             }
         }
 
@@ -141,27 +144,27 @@ $(function () {
         duration: 1000
     });
 
-    cy.on('mouseover', 'node', function (evt) {
+    //cy.on('mouseover', 'node', function (evt) {
 
-        if (this.data('id').includes('Answer') && this.data('tooltipText').length > 15) {
+    //    if (this.data('id').includes('Answer') && this.data('tooltipText').length > 15) {
 
-            var ans = this.data('tooltipText');
-            $("#divTooltip").text(ans);
-            $('#divTooltip').css('top', evt.originalEvent.clientY +"px");
-            $('#divTooltip').css('left', evt.originalEvent.clientX + "px");
-            $('#divTooltip').css('position', 'absolute');
-            $("#divTooltip").show();
-        }
-    });
+    //        var ans = this.data('tooltipText');
+    //        $("#divTooltip").text(ans);
+    //        $('#divTooltip').css('top', evt.originalEvent.clientY +"px");
+    //        $('#divTooltip').css('left', evt.originalEvent.clientX + "px");
+    //        $('#divTooltip').css('position', 'absolute');
+    //        $("#divTooltip").show();
+    //    }
+    //});
 
-    cy.on('mouseout', 'node', function (evt) {
+    //cy.on('mouseout', 'node', function (evt) {
 
-        if (this.data('id').includes('Answer')) {
+    //    if (this.data('id').includes('Answer')) {
 
-            var ans = this.data('tooltipText');
-            $("#divTooltip").hide();
-        }
-    });
+    //        var ans = this.data('tooltipText');
+    //        $("#divTooltip").hide();
+    //    }
+    //});
 });
 
 function rearrangeNodes() {
@@ -181,13 +184,15 @@ function addToTreeClick() {
 
         var questionNodeLength = cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length;
 
-        addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex, masterParentID);
+        addQuestion(300 + xPositionIncrement, yPositionIncrement, questionIndex, masterParentID);
+        xPositionIncrement = xPositionIncrement + 300;
 
         $("#tbAnswers").val('');
         $("#divAnswerContainer").dialog('close');
     }
-    else {
-        addQuestion(clickedNodeX, clickedNodeY + 100, questionIndex, masterParentID);
+    else
+    {
+        addQuestion(300 +xPositionIncrement, yPositionIncrement, questionIndex, masterParentID);
         $("#tbAnswers").val('');
         $("#divAnswerContainer").dialog('close');
     }
@@ -259,7 +264,14 @@ function addAnswer() {
     var positionY = clickedNodeY + (childNodeLength > 0 ? 100 * childNodeLength : 0);
     var dummyAnswer = '';
     if (answerLength > 15) {
-        dummyAnswer = answer.substring(0, 15) + "...";
+
+        for(var i=0; i< answerLength / 15; i++)
+        {
+            var j= i*15;
+            dummyAnswer = dummyAnswer + answer.substring(j,j+15) + "\n";
+            
+        }
+        //dummyAnswer = answer.substring(0, 15) + "\n" + answer.substring(16);
     }
     else
         dummyAnswer = answer;
@@ -274,15 +286,13 @@ function addAnswer() {
             name: dummyAnswer,
             tooltipText: answer
         },
-        renderedPosition: { x: clickedNodeX + 300, y: positionY }, style: {
+        renderedPosition: { x: clickedNodeX, y: positionY + 150 }, style: {
             shape: 'roundrectangle',
             'background-color': 'pink',
             'font-size': 15,
             width: 175,
-            height: 50,
+            height: 50*(answerLength/30) +5,
             'word-break': 'break-all'
-
-
         }
     },
     { group: "edges", data: { id: 'QuestionAnswerEdge' + (questionNodeLength + answerNodeLength), source: parentId, target: answerId } }]);
@@ -308,12 +318,16 @@ function deleteNode() {
 
 function saveAsJPEG() {
     var jpg64 = cy.jpg({ full: true });
-    //var url = jpg64.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-    window.open(jpg64);
+    $('#testAnchor').attr('href', jpg64);
+    $('#testAnchor').attr('download', 'DevelopersGuide.jpg');
+    var downloadLinkToBeClicked = document.getElementById('testAnchor');
+    downloadLinkToBeClicked.click();
 }
 
 function saveAsPNG() {
     var png64 = cy.png({ full: true });
-    //var url = png64.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-    window.open(png64);
+    $('#testAnchor').attr('href', png64);
+    $('#testAnchor').attr('download', 'DevelopersGuide.png');
+    var downloadLinkToBeClicked = document.getElementById('testAnchor');
+    downloadLinkToBeClicked.click();
 }

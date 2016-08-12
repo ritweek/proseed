@@ -25,14 +25,13 @@
 
     <div id="divAnswerContainer">
         <textarea id="tbAnswers" rows="5" style="width: 96%"></textarea>
-        <input type="button" value="Add more answers" onclick="addAndContinueClick()" style="float: left" />
+        <input type="button" value="OK, What else?" onclick="addAndContinueClick()" style="float: left" />
         <input id="btnProceedQue" type="button" value="Proceed to next question" onclick="addToTreeClick()" style="float: left" />
         <input type="button" value="Delete" onclick="deleteNode()" style="float: left" />
 
     </div>
-
+    <a id="testAnchor" href="#" download="" style="display:none;">..</a>
     <div id="divTooltip" style="display:none">tooltip</div>
-
     <div id="divDeleteContainer">
         <input type="button" value="Delete" onclick="deleteNode()" />
     </div>
