@@ -183,7 +183,8 @@ function addToTreeClick() {
 
         var questionNodeLength = cy.filter("node[parentId='" + masterParentID + "']").filter("node[nodeType='Question']").select().length;
 
-        addQuestion(300 +xPositionIncrement, yPositionIncrement, questionIndex, masterParentID);
+        addQuestion(300 + xPositionIncrement, yPositionIncrement, questionIndex, masterParentID);
+        xPositionIncrement = xPositionIncrement + 300;
 
         $("#tbAnswers").val('');
         $("#divAnswerContainer").dialog('close');
