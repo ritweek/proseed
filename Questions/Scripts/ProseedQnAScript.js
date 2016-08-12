@@ -21,6 +21,8 @@ var questions = [" What’s the minimum thing that needs to be done?",
     "What connections should be opened and released?",
     "What boundary conditions we need to focus on?"];
 
+var deletedQuestions = [];
+
 $(function () {
     $('#divAnswerContainer').dialog({
         autoOpen: false,
@@ -52,7 +54,6 @@ $(function () {
                 'text-outline-width': 0,
                 'font-size': 22,
                 'word-break': 'break-all'
-
             })
             .selector('edge')
             .css({
@@ -215,19 +216,19 @@ function addAndContinueClick() {
 }
 
 function addQuestion(positionX, positionY, questionIndex, masterParentID) {
-
-    // Work in PROGRESS
-    // Do not generate new question, when there are questions un-answered on canvas
-    ////var numQues = cy.filter("node[nodeType='Question']").select().length;
-    ////for (var i = 0; i < numQues; i++) {
-    ////    var node = cy.filter("node[nodeType='Question']").select()[i];
-    ////    if (node.filter("node[nodeType='Answer']").select().length == 0) {
-    ////        // Alert user to answer existing question first, before adding new question
-    ////        return;
-    ////    }
-    ////}
-
     var questionNodeLength = cy.filter("node[nodeType='Question']").select().length;
+
+    if (//questionIndex == questions.length &&
+        deletedQuestions.length > 0) {
+
+        questionIndex = questionIndex + deletedQuestions.length;
+        if (questionIndex >= questions.length) {
+            questionIndex = deletedQuestions[0] - 1;
+            questionNodeLength = deletedQuestions[0] - 1
+            deletedQuestions.splice(0, 1);
+        }
+    }
+
     var answerNodeLength = cy.filter("node[nodeType='Answer']").select().length;
     var questionId = "Question" + (questionNodeLength + 1);
     var flag = 0;
@@ -310,6 +311,7 @@ function deleteNode() {
 
     var deleteNode = cy.$("#" + parentId);
     cy.remove(deleteNode);
+    deletedQuestions.push(parentId.substring(8));
     $("#divDeleteContainer").dialog('close');
     $("#divAnswerContainer").dialog('close');
 }
