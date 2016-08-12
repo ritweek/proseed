@@ -83,6 +83,10 @@ $(function () {
             padding: 10
         }
     });
+    var parentNodeWidth = 50;
+    if (scenario.length > 30) {
+        parentNodeWidth = 50 * (scenario.length/30)
+    }
     cy.add([
         {
             group: "nodes", data: { id: 'Scenario', sno: 1, name: scenario, nodeType: 'Scenario', parentId: '', questionIndex: 0 },
@@ -90,7 +94,7 @@ $(function () {
             style: {
                 shape: 'oval',
                 width: 300,
-                height: 50
+                height: parentNodeWidth
             }
         }
     ]);
