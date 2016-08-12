@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.css"/>
+	<link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.8.2.min.js"></script>
+    <script src="Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script src="Scripts/Cytoscope/cytoscape.min.js"></script>
+    <script src="Scripts/Cytoscope/dagre.min.js"></script>
+    <script src="Scripts/Cytoscope/cytoscape-dagre.js"></script>
+	<script type="text/javascript">
+		function getParameterByName(name, url) {
+			if (!url) url = window.location.href;
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+		
+	    $(document).ready(function(){
+		    scenario = getParameterByName('scenario'); 
+		});        
+    </script>
+    <script src="Scripts/ProseedQnAScript.js"></script>
+    <link href="Content/ProseedQnAStyle.css" rel="stylesheet" />    
+</head>
+<body>
+    <div class="content-wrapper">
+			<div class="float-left">
+				<p class="site-title">
+					<img src="Images/Logo.png" id="logo" height="35" width="35"/>
+					<a href="~/">Develop as you wish!</a>
+				</p>
+			</div>
+			<div class="float-right">            
+				<div id="download-buttons" style="display:none">
+					<input type="button" name="Save As JPEG" value="Save as JPEG " onclick="saveAsJPEG()" />
+					<input type="button" name="Save As PNG" value="Save as PNG " onclick="saveAsPNG()" />
+				</div>
+			</div>
+		</div>
+    <div id="cy"></div>
+
+    <div id="divAnswerContainer">
+        <textarea id="tbAnswers" rows="5" style="width: 96%"></textarea>
+        <input id="btnProceedQue" type="button" value="Proceed to next question" onclick="addToTreeClick()" />
+        <input type="button" value="Add more answers" onclick="addAndContinueClick()" />
+        <input type="button" value="Delete" onclick="deleteNode()" />
+    </div>
+
+    <div id="divTooltip"></div>
+
+    <div id="divDeleteContainer">
+        <input type="button" value="Delete" onclick="deleteNode()" />
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+	<script src="Scripts/jquery-1.8.2.min.js"></script>
+    <script src="Scripts/jquery-ui-1.8.24.min.js"></script>
+    <link href="Content/Site.css" rel="stylesheet" />
+	<script type="text/javascript">
+	   function submitOnClick(){
+		  window.location = "Q&A.html?scenario="+$('#txtbtn1').val();
+	   }
+	</script>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                <!--<asp:Image ImageUrl="~/Images/Logo.png" ID="logo" runat="server" Height="35px" Width="35px" />-->
+                <img src="Images/Logo.png" id="logo" height="35" width="35"/>
+                <a href="~/">Develop as you wish!</a>
+            </p>
+        </div>
+    </div>
+    <br/>
+	<br/>
+	<div style="width:100%;text-align:center">		
+        <span></span>
+		<div>
+			<h2 style="margin-top:40px">Guiding the developer to develop software features in a focused manner.</h2>
+			<h4 style="font-family: cursive; font-size:2.5em;color:#2d728c">SO, WHAT YOU WANT TO DEVELOP TODAY?</h4>
+			<input type="text" id="txtbtn1" />
+			<!--<asp:TextBox ID="txtbtn1" value="" runat="server"></asp:TextBox>
+			<asp:RequiredFieldValidator runat="server" ControlToValidate="txtbtn1" ErrorMessage="*This field is mandatory" ForeColor="#FF3300" Display="Dynamic"></asp:RequiredFieldValidator>
+			<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtbtn1" Display="Dynamic" ErrorMessage="Not a valid value" ValidationExpression="^[a-z\s+A-Z]*$" ForeColor="#FF3300"></asp:RegularExpressionValidator>-->
+			<br />
+			<!--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtbtn1" ForeColor="#FF3300" SetFocusOnError="True"></asp:RequiredFieldValidator>-->
+		</div>
+		<!--<asp:Button ID="btnsubmit" runat="server" Text="Lets get started" OnClick="btnsubmit_Click"></asp:Button>-->
+		<input type="submit" id="btnsubmit" name="name" value="Lets get started" onclick="submitOnClick()" />
+	</div>
+</body>
+</html>
